@@ -9,10 +9,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/style.css" type="text/css" rel="stylesheet">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" type="text/css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Oleo+Script+Swash+Caps&family=Rouge+Script&display=swap" rel="stylesheet"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-        <title>Login</title>
+        <title>Register</title>
     </head>
     <body>
          <div class="container">

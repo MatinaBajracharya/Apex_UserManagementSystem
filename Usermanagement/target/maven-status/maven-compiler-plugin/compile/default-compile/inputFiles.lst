@@ -1,5 +1,9 @@
-C:\Users\acer\Desktop\testing2\src\main\java\com\usermgmt\form\RegistrationForm.java
-C:\Users\acer\Desktop\testing2\src\main\java\com\usermgmt\service\RegistrationService.java
-C:\Users\acer\Desktop\testing2\src\main\java\com\usermgmt\controller\LoginController.java
-C:\Users\acer\Desktop\testing2\src\main\java\com\usermgmt\serviceImpl\RegistrationServiceImpl.java
-C:\Users\acer\Desktop\testing2\src\main\java\com\usermgmt\controller\RegistrationController.java
+D:\Herald\Semester 4\System Analysis and Design Method\usermgmt\src\main\java\com\usermgmt\connector\DatabaseConnector.java
+D:\Herald\Semester 4\System Analysis and Design Method\usermgmt\src\main\java\com\usermgmt\controller\RegistrationController.java
+D:\Herald\Semester 4\System Analysis and Design Method\usermgmt\src\main\java\com\usermgmt\controller\LoginController.java
+D:\Herald\Semester 4\System Analysis and Design Method\usermgmt\src\main\java\com\usermgmt\form\RegistrationForm.java
+D:\Herald\Semester 4\System Analysis and Design Method\usermgmt\src\main\java\com\usermgmt\serviceImpl\RegistrationServiceImpl.java
+D:\Herald\Semester 4\System Analysis and Design Method\usermgmt\src\main\java\com\usermgmt\connector\DbConnector.java
+D:\Herald\Semester 4\System Analysis and Design Method\usermgmt\src\main\java\com\usermgmt\model\User.java
+D:\Herald\Semester 4\System Analysis and Design Method\usermgmt\src\main\java\com\usermgmt\dao\UserDao.java
+D:\Herald\Semester 4\System Analysis and Design Method\usermgmt\src\main\java\com\usermgmt\service\RegistrationService.java

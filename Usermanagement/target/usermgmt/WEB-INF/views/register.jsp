@@ -3,7 +3,7 @@
     Created on : Apr 24, 2020, 5:02:33 PM
     Author     : acer
 --%>
-
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%> 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -22,7 +22,9 @@
               <div class="card">
                   <div class="card-body">
                       <h5>Come join the community! Let's set up your account first. Already have an account? Login</h5>
+                      <form:errors path="registrationForm.*"/>
                       <form action="/usermgmt/app/submit" style="margin: 50px;" method="post">
+                      <p>${error}</p>
                           <div class="form-group">
                               <label for="fname">First Name</label>
                               <input type="text" class="form-control" name="fname">

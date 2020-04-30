@@ -6,4 +6,5 @@ public interface RegistrationService {
 	
 	public boolean isPasswordAndConfirmPasswordSame(RegistrationForm registrationForm);
 
+	public void saveUser(RegistrationForm form);
 }
