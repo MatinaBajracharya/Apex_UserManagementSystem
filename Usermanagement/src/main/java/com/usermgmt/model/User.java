@@ -6,7 +6,45 @@ public class User {
 	private String firstName;
 	private String middleName;
 	private String lastName;
-	private String email;
+	private String email; 
+	private String password;
+	private String role;
+	private String ans1;
+	private String ans2;
+	
+	
+	
+	public String getAns1() {
+		return ans1;
+	}
+
+	public void setAns1(String ans1) {
+		this.ans1 = ans1;
+	}
+
+	public String getAns2() {
+		return ans2;
+	}
+
+	public void setAns2(String ans2) {
+		this.ans2 = ans2;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
 	public Integer getId() {
 		return id;

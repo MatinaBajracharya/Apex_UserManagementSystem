@@ -1,32 +1,26 @@
 package com.usermgmt.form;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-
 public class RegistrationForm {
 
-	@NotEmpty(message = "firstname should not be empty")
 	private String fname;
-	
 	private String mname;
-	
-	@NotEmpty(message = "lastname should not be empty")
 	private String lname;
-	
-	@NotEmpty(message = "Email should not be empty")
 	private String email;
-	
-	@NotEmpty(message = "Password should not be empty")
 	private String pass1;
-	
-	@NotEmpty(message = "Confirm Password should not be empty")
 	private String pass2;
-	
-	@NotEmpty(message = "Answer should not be empty")
 	private String ans1;
-	
-	@NotEmpty(message = "Answer should not be empty")
 	private String ans2;
+	private String role;
+	
+	
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
 
 	public String getFname() {
 		return fname;

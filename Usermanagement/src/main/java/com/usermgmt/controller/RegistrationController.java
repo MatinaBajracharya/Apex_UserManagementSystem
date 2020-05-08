@@ -1,27 +1,35 @@
 package com.usermgmt.controller;
 
-
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.usermgmt.form.RegistrationForm;
+import com.usermgmt.model.User;
+import com.usermgmt.service.HistoryService;
 import com.usermgmt.service.RegistrationService;
 
 @Controller
 @RequestMapping("/app")
 @Validated
 public class RegistrationController {
+	
+	private final String ADDED_USER = "ADDED_USER";
 
 	@Autowired
 	RegistrationService registrationService;
+	
+	@Autowired 
+	HistoryService historyService;
 
 	@RequestMapping("/register")
 	public ModelAndView register() {
@@ -29,26 +37,59 @@ public class RegistrationController {
 		return mav;
 	}
 
+	@RequestMapping("/newuser")
+	public ModelAndView registerNewUser(HttpSession session) {
+		ModelAndView mav = null;
+		User loggedInUser = (User) session.getAttribute("loggedInUser");
+		if (loggedInUser != null && loggedInUser.getRole().equalsIgnoreCase("ADMIN")) {
+			mav = new ModelAndView("newuser");
+		} else {
+			mav = new ModelAndView("login");
+		}
+		return mav;
+	}
+
 	@RequestMapping("/submit")
 	public ModelAndView submitForm(@ModelAttribute("registrationForm") @Valid RegistrationForm registrationForm,
-			BindingResult result) {
+			BindingResult result, HttpSession session) {
+		User loggedInUser = (User) session.getAttribute("loggedInUser");
 		ModelAndView mav = new ModelAndView("register");
 		if (result.hasErrors()) {
 			return mav;
 		} else {
 			boolean isSame = registrationService.isPasswordAndConfirmPasswordSame(registrationForm);
-			if (!isSame) {
-				FieldError fe = new FieldError("registrationForm", "pass1", "");
-				FieldError fe2 = new FieldError("registrationForm", "pass2", "");
-				result.addError(fe);
-				result.addError(fe2);
-				return mav;
+			if (!isSame && loggedInUser != null && loggedInUser.getRole().equalsIgnoreCase("ADMIN")) {
+				mav = new ModelAndView("newuser");
+				mav.addObject("pwMsg", "Passwords do not match");
+			} else if (!isSame && loggedInUser == null) {
+				mav.addObject("pwMsg", "Passwords do not match");
 			} else {
-				mav = new ModelAndView("index");
-				registrationService.saveUser(registrationForm);
-				return mav;
+				if (loggedInUser != null && loggedInUser.getRole().equalsIgnoreCase("ADMIN")) {
+					mav = new ModelAndView("users");
+					boolean saveUser = registrationService.saveUser(registrationForm, loggedInUser);
+					if (!saveUser) {
+						mav = new ModelAndView("newuser");
+						mav.addObject("regMsg", "Email has already been taken");
+					} else {
+						historyService.addActivityHistory(loggedInUser, registrationForm.getEmail(), ADDED_USER);
+						mav.setView(new RedirectView("/app/users", true, true, false));
+					}
+				} else {
+					//mav = new ModelAndView("login");
+					//mav.setView(new RedirectView("/app/login", true, true, true));
+					//mav.addObject("regSuccess", "You have been registered successfully, Please Log In to continue.");
+					boolean saveUser = registrationService.saveUser(registrationForm, loggedInUser);
+					if (!saveUser) {
+						mav = new ModelAndView("register");
+						mav.addObject("regMsg", "Email has already been taken");
+					} else {
+						mav = new ModelAndView("login");
+						mav.addObject("regSuccess", "You have been registered successfully, Please Log In to continue.");
+					}
+				}
 			}
-		}	
-	}
 
+			return mav;
+		}
+	}
 }
