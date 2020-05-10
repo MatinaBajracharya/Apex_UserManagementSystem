@@ -10,11 +10,13 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.usermgmt.form.ChangePasswordForm;
 import com.usermgmt.form.ForgotPasswordForm;
+import com.usermgmt.form.UpdateProfileForm;
 import com.usermgmt.model.DeleteUser;
 import com.usermgmt.model.User;
 import com.usermgmt.service.HistoryService;
@@ -24,11 +26,13 @@ import com.usermgmt.service.UserService;
 @RequestMapping("/app")
 public class UserController {
 
-	private final String PASSWORD_CHANGE = "PASSWORD_CHANGE";
+	private static final String PASSWORD_CHANGE = "PASSWORD_CHANGE";
 
-	private final String PASSWORD_RESET = "PASSWORD_RESET";
-	
-	private final String DELETE_USER = "DELETED_USER";
+	private static final String PASSWORD_RESET = "PASSWORD_RESET";
+
+	private static final String DELETE_USER = "DELETED_USER";
+
+	private static final String UPDATE_USER = "UPDATED_USER";
 
 	@Autowired
 	UserService userService;
@@ -103,8 +107,8 @@ public class UserController {
 			}
 			mav.addObject("pwChangeMsg", "Invalid Credentials");
 			return mav;
-		} 
-		
+		}
+
 		User existingUser = null;
 		if ((!StringUtils.isEmpty(email) && !StringUtils.isEmpty(password))) {
 			existingUser = userService.findUserByEmailAndPassword(changePasswordForm);
@@ -118,8 +122,8 @@ public class UserController {
 				return mav;
 			}
 		}
-		
-		if(loggedInUser.getId() != existingUser.getId()) {
+
+		if (loggedInUser.getId() != existingUser.getId()) {
 			if (loggedInUser.getRole().equalsIgnoreCase("ADMIN")) {
 				mav = new ModelAndView("changepwAdmin");
 			} else if (loggedInUser.getRole().equalsIgnoreCase("CLIENT")) {
@@ -207,46 +211,34 @@ public class UserController {
 		mav.setView(new RedirectView("/app/users", true, true, false));
 		return mav;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	/*
-	 * if (loggedInUser.getRole().equalsIgnoreCase("CLIENT")) { mav = new
-	 * ModelAndView("changepwClient"); mav.addObject("pwChangeMsg",
-	 * "Invalid Credentials"); return mav; } boolean passwordAndConfirmPasswordSame
-	 * = userService.isPasswordAndConfirmPasswordSame(
-	 * changePasswordForm.getNewPassword(),
-	 * changePasswordForm.getConfirmPassword());
-	 * 
-	 * if (loggedInUser != null) { boolean passwordAndConfirmPasswordSame =
-	 * userService.isPasswordAndConfirmPasswordSame(
-	 * changePasswordForm.getNewPassword(),
-	 * changePasswordForm.getConfirmPassword()); if (passwordAndConfirmPasswordSame)
-	 * { User existingUser =
-	 * userService.findUserByEmailAndPassword(changePasswordForm); if ((existingUser
-	 * == null || null == existingUser.getId()) &&
-	 * loggedInUser.getRole().equalsIgnoreCase("CLIENT")) { mav = new
-	 * ModelAndView("changepwClient"); mav.addObject("pwChangeMsg",
-	 * "Invalid Credentials"); return mav; }
-	 * 
-	 * if ((existingUser == null || null == existingUser.getId()) &&
-	 * loggedInUser.getRole().equalsIgnoreCase("ADMIN")) { mav = new
-	 * ModelAndView("changepwAdmin"); mav.addObject("pwChangeMsg",
-	 * "Invalid Credentials"); return mav; } boolean updatedPassword =
-	 * userService.updatePassword(changePasswordForm.getNewPassword(),
-	 * changePasswordForm.getEmail());
-	 * historyService.addActivityHistory(loggedInUser, null, PASSWORD_CHANGE); if
-	 * (updatedPassword) { mav = new ModelAndView("login");
-	 * mav.addObject("pwUpdatedSuccess", "Password Updated, login to continue"); } }
-	 * else { mav = new ModelAndView("changepwClient"); mav.addObject("pwChangeMsg",
-	 * "Passwords do not match"); } } else { mav = new ModelAndView("error"); }
-	 * return mav;
-	 */
-	
+
+	@RequestMapping("/user/edit")
+	public ModelAndView editUser(@RequestParam("id") Integer id, HttpSession session) {
+		User loggedInUser = (User) session.getAttribute("loggedInUser");
+		ModelAndView mav = new ModelAndView("editUser");
+		if (loggedInUser == null) {
+			mav = new ModelAndView("error");
+			return mav;
+		}
+		User existingUser = userService.findUserById(id);
+		mav.addObject("existingUser", existingUser);
+		return mav;
+	}
+
+	@RequestMapping("/user/edit/submit")
+	public ModelAndView submitEditUser(@ModelAttribute("updateProfileForm") UpdateProfileForm updateProfileForm,
+			@RequestParam("id") Integer id, HttpSession session) {
+		User loggedInUser = (User) session.getAttribute("loggedInUser");
+		boolean checkRequiredFieldsEmpty = userService.checkRequiredFields(updateProfileForm);
+		if (!checkRequiredFieldsEmpty) {
+			boolean updated = userService.updateUserDetails(updateProfileForm, id);
+			if (updated) {
+				historyService.addActivityHistory(loggedInUser, updateProfileForm.getEmail(), UPDATE_USER);
+			}
+		}
+		ModelAndView mav = new ModelAndView();
+		mav.setView(new RedirectView("/app/users", true, true, false));
+		return mav;
+	}
+
 }

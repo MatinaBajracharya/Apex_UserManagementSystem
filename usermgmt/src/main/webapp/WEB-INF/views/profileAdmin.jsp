@@ -63,22 +63,22 @@
               <div class="card info">
                   <div class="card-body">
                     <h3 style="text-align: center;">Edit Your Profile</h3>
-                      <form action="/usermgmt/app/submit" style="margin: 50px;" method="post">
+                      <form action="/usermgmt/app/profile/update" style="margin: 50px;" method="post">
 		                          <div class="form-group">
-		                              <label for="fname">First Name</label>
-		                              <input type="text" class="form-control" name="fname">
+		                              <label for="fname" >First Name</label>
+		                              <input type="text" value="${user.firstName}" class="form-control" name="firstName">
 		                          </div>
 		                          <div class="form-group">
 		                              <label for="mname">Middle Name</label>
-		                              <input type="text" class="form-control" name="mname" id="mname">
+		                              <input type="text" value="${user.middleName}" class="form-control" name="middleName">
 		                          </div>
 		                          <div class="form-group">
 		                              <label for="lname">Last Name</label>
-		                              <input type="text" class="form-control" name="lname">
+		                              <input type="text" value="${user.lastName}" class="form-control" name="lastName">
 		                          </div>
 		                          <div class="form-group">
 		                              <label for="exampleInputEmail1">Email address</label>
-		                              <input type="email" class="form-control" name="email" aria-describedby="emailHelp">
+		                              <input type="email" value="${user.email}" class="form-control" name="email" aria-describedby="emailHelp">
 		                          </div>
 		                  </div>
 		              </div>
@@ -89,11 +89,11 @@
 		                      <h5 class="card-title">Security Questions</h5><br>
 		                      <div class="form-group">
 		                          <label>Which city were you born in?</label>
-		                          <input type="text" class="form-control"  name="ans1" placeholder="Your answer here..">
+		                          <input type="text" value="${user.ans1}" class="form-control"  name="ans1" placeholder="Your answer here..">
 		                      </div>
 		                      <div class="form-group">
 		                          <label>What is the name of your pet?</label>
-		                          <input type="text" class="form-control" name="ans2" id="ans2" placeholder="Your answer here..">
+		                          <input type="text" value="${user.ans2}" class="form-control" name="ans2" id="ans2" placeholder="Your answer here..">
 		                      </div> <br>
 		                      <button class="btn btn-primary" type="Submit">Submit</button>
 		                  </div>

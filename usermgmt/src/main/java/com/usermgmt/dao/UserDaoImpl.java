@@ -107,6 +107,8 @@ public class UserDaoImpl {
 				user.setMiddleName(result.getString("middle_name"));
 				user.setPassword(result.getString("password"));
 				user.setRole(result.getString("role"));
+				user.setAns1(result.getString("security_ans1"));
+				user.setAns2(result.getString("security_ans2"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -166,6 +168,80 @@ public class UserDaoImpl {
 			myConn = DriverManager.getConnection(URL, "root", "");
 			stmt = myConn.prepareStatement("delete from user where id= ? ");
 			stmt.setInt(1, deleteUserId);
+			stmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			stmt.close();
+			myConn.close();
+		}
+	}
+
+	public void updateUser(String firstName, String lastName, String middleName, String email, String ans1, String ans2,
+			Integer id) throws SQLException {
+		PreparedStatement stmt = null;
+		Connection myConn = null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			myConn = DriverManager.getConnection(URL, "root", "");
+			stmt = myConn.prepareStatement(
+					"update user set first_name = ?, last_name = ?, middle_name = ?, email = ?, security_ans1 = ?, security_ans2 = ? where id = ?");
+			stmt.setString(1, firstName);
+			stmt.setString(2, lastName);
+			stmt.setString(3, middleName);
+			stmt.setString(4, email);
+			stmt.setString(5, ans1);
+			stmt.setString(6, ans2);
+			stmt.setInt(7, id);
+			stmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			stmt.close();
+			myConn.close();
+		}
+
+	}
+	
+	public User findById(Integer id) {
+		User user = new User();
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection myConn = DriverManager.getConnection(URL, "root", "");
+			PreparedStatement stmt = myConn.prepareStatement("select * from user where id = ? ");
+			stmt.setInt(1, id);
+
+			ResultSet result = stmt.executeQuery();
+			while (result.next()) {
+				user.setId(result.getInt("id"));
+				user.setFirstName(result.getString("first_name"));
+				user.setLastName(result.getString("last_name"));
+				user.setEmail(result.getString("email"));
+				user.setMiddleName(result.getString("middle_name"));
+				user.setPassword(result.getString("password"));
+				user.setRole(result.getString("role"));
+				user.setAns1(result.getString("security_ans1"));
+				user.setAns2(result.getString("security_ans2"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return user;
+	}
+
+	public void updateUserInfo(String firstName, String lastName, String middleName, String email, Integer id) throws SQLException {
+		PreparedStatement stmt = null;
+		Connection myConn = null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			myConn = DriverManager.getConnection(URL, "root", "");
+			stmt = myConn.prepareStatement(
+					"update user set first_name = ?, last_name = ?, middle_name = ?, email = ? where id = ?");
+			stmt.setString(1, firstName);
+			stmt.setString(2, lastName);
+			stmt.setString(3, middleName);
+			stmt.setString(4, email);
+			stmt.setInt(5, id);
 			stmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -10,6 +10,7 @@ import org.springframework.util.StringUtils;
 import com.usermgmt.dao.UserDaoImpl;
 import com.usermgmt.form.ChangePasswordForm;
 import com.usermgmt.form.ForgotPasswordForm;
+import com.usermgmt.form.UpdateProfileForm;
 import com.usermgmt.model.User;
 import com.usermgmt.service.UserService;
 
@@ -65,8 +66,7 @@ public class UserServiceImpl implements UserService {
 		boolean checkAnswer = false;
 		String ans1 = forgotPasswordForm.getAns1();
 		String ans2 = forgotPasswordForm.getAns2();
-		if (existingUser.getAns1().equalsIgnoreCase(ans1)
-				&& existingUser.getAns2().equalsIgnoreCase(ans2)) {
+		if (existingUser.getAns1().equalsIgnoreCase(ans1) && existingUser.getAns2().equalsIgnoreCase(ans2)) {
 			checkAnswer = true;
 		}
 		return checkAnswer;
@@ -80,7 +80,33 @@ public class UserServiceImpl implements UserService {
 			e.printStackTrace();
 		}
 	}
-	
-	
-	
+
+	@Override
+	public User findUserById(Integer id) {
+		User user = userDao.findById(id);
+		return user;
+	}
+
+	@Override
+	public boolean updateUserDetails(UpdateProfileForm updateProfileForm, Integer id) {
+		boolean updated = false;
+		try {
+			userDao.updateUserInfo(updateProfileForm.getFirstName(), updateProfileForm.getLastName(),
+					updateProfileForm.getMiddleName(), updateProfileForm.getEmail(), id);
+			updated = true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return updated;
+	}
+
+	@Override
+	public boolean checkRequiredFields(UpdateProfileForm updateProfileForm) {
+		if (StringUtils.isEmpty(updateProfileForm.getFirstName())
+				|| StringUtils.isEmpty(updateProfileForm.getLastName())
+				|| StringUtils.isEmpty(updateProfileForm.getEmail())) {
+			return true;
+		}
+		return false;
+	}
 }

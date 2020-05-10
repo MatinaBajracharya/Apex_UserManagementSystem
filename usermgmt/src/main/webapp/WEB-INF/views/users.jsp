@@ -62,7 +62,7 @@
 									<td><c:out value="${user.firstName}" /></td>
 									<td><c:out value="${user.lastName}" /></td>
 									<td><c:out value="${user.role}" /></td>
-									<td><a href="#" class="btn btn-secondary">Edit User Info</a>
+									<td><a href="http://localhost:8080/usermgmt/app/user/edit?id=${user.id}" class="btn btn-secondary">Edit User Info</a>
 									<form method ="post" action="http://localhost:8080/usermgmt/app/user/delete"><br>
 									<input type="hidden" name="deleteUserId" value="${user.id}" />
 									<input type="hidden" name="email" value="${user.email}" />							
