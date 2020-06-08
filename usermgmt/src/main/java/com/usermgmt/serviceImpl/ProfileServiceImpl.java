@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import com.usermgmt.dao.UserDaoImpl;
+import com.usermgmt.dao.UserDao;
 import com.usermgmt.form.UpdateProfileForm;
 import com.usermgmt.service.ProfileService;
 
@@ -14,7 +14,7 @@ import com.usermgmt.service.ProfileService;
 public class ProfileServiceImpl implements ProfileService {
 
 	@Autowired
-	UserDaoImpl userDao;
+	UserDao userDao;
 
 	@Override
 	public boolean updateProfile(UpdateProfileForm updateProfileForm, Integer id) {

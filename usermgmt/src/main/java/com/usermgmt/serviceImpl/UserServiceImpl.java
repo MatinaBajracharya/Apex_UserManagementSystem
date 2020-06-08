@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import com.usermgmt.dao.UserDaoImpl;
+import com.usermgmt.dao.UserDao;
 import com.usermgmt.form.ChangePasswordForm;
 import com.usermgmt.form.ForgotPasswordForm;
 import com.usermgmt.form.UpdateProfileForm;
@@ -18,7 +18,7 @@ import com.usermgmt.service.UserService;
 public class UserServiceImpl implements UserService {
 
 	@Autowired
-	UserDaoImpl userDao;
+	UserDao userDao;
 
 	public List<User> getAllUsers() {
 		List<User> allUsers = userDao.getAllUsers();

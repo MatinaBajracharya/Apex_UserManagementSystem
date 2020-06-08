@@ -19,21 +19,26 @@ import com.usermgmt.service.HistoryService;
 public class HistoryController {
 	@Autowired
 	HistoryService historyService;
-
+	
+	/*If the role is set as admin, then they are directed to admin's dashboard. 
+	 * If  the role is set as admin, then they are directed to client's dashboard.
+	 * Else, an error is thrown */
+	
 	@RequestMapping("/history")
 	public ModelAndView view(HttpSession session) {
 		ModelAndView mav = null;
 		User user = (User) session.getAttribute("loggedInUser");
-		if (user == null) {
+		//if the page is tried to access directly through the URL
+		if (user == null) { 
 			mav = new ModelAndView("error");
-		} else if (user != null && user.getRole().equalsIgnoreCase("ADMIN")) {
+		} else if (user != null && user.getRole().equalsIgnoreCase("ADMIN")) { 
 			mav = new ModelAndView("historyAdmin");
-			List<History> allHistory = historyService.getAllHistory();
-			if (!CollectionUtils.isEmpty(allHistory)) {
+			List<History> allHistory = historyService.getAllHistory(); 
+			if (!CollectionUtils.isEmpty(allHistory)) { 
 				mav.addObject("allHistory", allHistory);
 			}
 		} else {
-			mav = new ModelAndView("historyClient");
+			mav = new ModelAndView("historyClient"); 
 			List<History> allHistory = historyService.getHistoryByUser(user);
 			if (!CollectionUtils.isEmpty(allHistory)) {
 				mav.addObject("allHistory", allHistory);

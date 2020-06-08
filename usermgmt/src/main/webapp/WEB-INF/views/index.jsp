@@ -1,5 +1,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"
+    isELIgnored="false"
+%> 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,37 +13,42 @@
 	href="https://fonts.googleapis.com/css2?family=Josefin+Slab:wght@700&display=swap"
 	rel="stylesheet" />
 <link rel="stylesheet"
-	href="<%= request.getContextPath() %>/resources/css/style.css"
+	href="<%=request.getContextPath()%>/resources/css/style.css"
 	type="text/css" />
 <title>Home</title>
 </head>
 <body class="home">
 	<div class="wrapper">
-		<div class="sidebar">
-			<h2 class="menu">Menu</h2>
-			<ul>
-				<li><a href="http://localhost:8080/usermgmt/app/home"><i class="fas fa-home"></i>Home</a></li>
-				<li><a href="http://localhost:8080/usermgmt/app/profile"><i class="fas fa-user"></i>Profile</a></li>
-				<li><a href="http://localhost:8080/usermgmt/app/history"><i class="fas fa-history"></i>History</a></li>
-				<li><a href="http://localhost:8080/usermgmt/app/home"><i class="fas fa-list-alt"></i>Contact Us</a></li>
-				<c:choose>
-					<c:when test="${not empty loggedInUser}">
-						<li><a href="http://localhost:8080/usermgmt/app/logout"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
-					</c:when>
-				</c:choose>
-			</ul>
-		</div>
+		<jsp:include page="navClient.jsp" />
 		<div class="main_container">
-			<div class="header">Welcome!</div>
-			<div class="info">
-				<div>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-					Alias nam sed placeat dignissimos aliquam voluptatibus, deleniti
-					ratione dolores fugit quam aliquid incidunt, soluta perferendis
-					deserunt odio! Sed odit necessitatibus labore?</div>
+			<div class="header" style="font-size: 30px;">Welcome!</div> <br>
+				<div class="card ml-auto mr-auto" style="width: 80%;">
+					<div class="card-header">
+						<h4>At a Glance</h4>
+					</div>
+					<div class="card-body">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="card bg-light p-2 dash-box dash-box">
+									<h2>
+										<i class="fas fa-user-shield"></i>${loginCount}
+									</h2>
+									<h5>Number of times logged in</h5>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="card bg-light p-2 dash-box">
+									<h2>
+										<i class="fas fa-users"></i>${sessionTime} min(s)
+									</h2>
+									<h5>Session Time</h5>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
-	</div>
-
 	<script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 </body>
 </html>

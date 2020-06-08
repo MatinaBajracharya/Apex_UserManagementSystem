@@ -4,7 +4,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -27,6 +26,9 @@ public class ProfileController {
 	@Autowired
 	HistoryService historyService;
 
+	/*Based on the role of the logged in user, they are directed to their respective profile pages.
+	 * If any error occurs, error  page is shown.*/
+	
 	@RequestMapping("/profile")
 	public ModelAndView profile(HttpSession session) {
 		User user = (User) session.getAttribute("loggedInUser");
@@ -53,8 +55,12 @@ public class ProfileController {
 		return mav;
 	}
 	
+	/*If the update form has no errors then the profile of the user is updated and is redirected to the profile page.
+	 * The history table is also updated.
+	 * Else, an error is thrown. */
+	
 	@RequestMapping("/profile/update")
-	public ModelAndView deleteUser(@ModelAttribute("updateProfile") UpdateProfileForm updateProfileForm,
+	public ModelAndView updateUser(@ModelAttribute("updateProfile") UpdateProfileForm updateProfileForm,
 			HttpSession session) {
 		User loggedInUser = (User) session.getAttribute("loggedInUser");
 		ModelAndView mav = new ModelAndView();
@@ -67,7 +73,7 @@ public class ProfileController {
 			boolean updated = profileService.updateProfile(updateProfileForm, loggedInUser.getId());
 			if (updated) {
 				historyService.addActivityHistory(loggedInUser, null, PROFILE_UPDATE);
-				updateUserInSession(session, updateProfileForm);
+				updateUserInSession(session, updateProfileForm);   //calling private method
 			}
 			if (loggedInUser.getRole().equalsIgnoreCase("ADMIN")) {
 				mav.setView(new RedirectView("/app/admin/profile", true, true, false));
@@ -84,6 +90,7 @@ public class ProfileController {
 		return mav;
 	}
 	
+	/*Getting logged in user's information and setting it in the 'update profile' form.*/
 	private void updateUserInSession(HttpSession session, UpdateProfileForm updateProfileForm) {
 		User user = (User) session.getAttribute("loggedInUser");
 		user.setFirstName(updateProfileForm.getFirstName());

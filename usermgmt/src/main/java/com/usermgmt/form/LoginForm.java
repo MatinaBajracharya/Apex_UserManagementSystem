@@ -1,7 +1,12 @@
 package com.usermgmt.form;
 
+import javax.validation.constraints.NotEmpty;
+
 public class LoginForm {
+	@NotEmpty
 	private String email;
+	
+	@NotEmpty
 	private String password;
 
 	public String getEmail() {

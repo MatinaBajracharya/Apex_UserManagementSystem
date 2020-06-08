@@ -2,8 +2,9 @@ package com.usermgmt.serviceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
-import com.usermgmt.dao.UserDaoImpl;
+import com.usermgmt.dao.UserDao;
 import com.usermgmt.form.RegistrationForm;
 import com.usermgmt.model.User;
 import com.usermgmt.service.RegistrationService;
@@ -12,8 +13,9 @@ import com.usermgmt.service.RegistrationService;
 public class RegistrationServiceImpl implements RegistrationService {
 
 	@Autowired
-	UserDaoImpl userDao;
+	UserDao userDao;
 
+	@Override
 	public boolean isPasswordAndConfirmPasswordSame(RegistrationForm registrationForm) {
 		boolean isSame = false;
 		if (registrationForm != null && null != registrationForm.getPass1() && null != registrationForm.getPass2()) {
@@ -24,6 +26,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 		return isSame;
 	}
 
+	@Override
 	public boolean saveUser(RegistrationForm form, User loggedInUser) {
 		boolean userSaved = false;
 		User existingUser = userDao.findByEmail(form.getEmail());
@@ -32,6 +35,20 @@ public class RegistrationServiceImpl implements RegistrationService {
 			userSaved = true;
 		}
 		return userSaved;
+	}
+	
+	@Override
+	public boolean anyRequiredFieldEmpty(RegistrationForm registrationForm) {
+		if (StringUtils.isEmpty(registrationForm.getFname())
+				|| StringUtils.isEmpty(registrationForm.getLname())
+				|| StringUtils.isEmpty(registrationForm.getEmail()) 
+				|| StringUtils.isEmpty(registrationForm.getAns1())
+				|| StringUtils.isEmpty(registrationForm.getAns2()) 
+				|| StringUtils.isEmpty(registrationForm.getPass1())
+				|| StringUtils.isEmpty(registrationForm.getPass2())) {
+			return true;
+		}
+		return false;
 	}
 
 }

@@ -14,41 +14,23 @@
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/resources/css/chanepw.css"
 	type="text/css" />
-<title>Home</title>
+<title>Change Password</title>
 </head>
 <body class="home">
 	<div class="wrapper">
-		<div class="sidebar">
-			<h2 class="menu">Menu</h2>
-			<ul>
-				<li><a href="http://localhost:8080/usermgmt/app/admin/home"><i
-						class="fas fa-home"></i>Dashboard</a></li>
-				<li><a href="http://localhost:8080/usermgmt/app/admin/profile"><i
-						class="fas fa-user"></i>Profile</a></li>
-				<li><a href="http://localhost:8080/usermgmt/app/history"><i
-						class="fas fa-history"></i>History</a></li>
-				<li><a href="http://localhost:8080/usermgmt/app/users"><i class="fas fa-users"></i>Users</a></li>
-				<li><a href="http://localhost:8080/usermgmt/app/users"><i
-						class="fas fa-clipboard"></i>Report</a></li>
-				<c:choose>
-					<c:when test="${not empty loggedInUser}">
-						<li><a href="http://localhost:8080/usermgmt/app/logout"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
-					</c:when>
-				</c:choose>
-			</ul>
-		</div>
+		<jsp:include page='navAdmin.jsp' />
 		<div class="main_container">
 			<div class="header" style="font-size: 30px;">Change your password.</div>
 			<div class="info">
 				<div>
-					<div class="card" style="width: 30rem; margin-left:30%;">
-						<div class="card-header">Please fill up the form below.</div>
+					<div class="card mr-auto ml-auto" style="width: 30rem;">
+						<div class="card-header" style="align:center;">Please fill up the form below.</div>
 						<div class="card-body">
-							<h2 style="color:red">${pwChangeMsg}</h2>
 							<img
 								src="<%=request.getContextPath()%>/resources/images/user.png"
 								alt="" class="img-rounded"
-								style="height: 40%; width: 40%; margin-left: 128px;" /><br />
+								style="height: 40%; width: 40%; margin-left: 128px;" /><br><br>
+								<h4 style="color:red; text-align:center">${pwChangeMsg}</h4>
 							<form action="/usermgmt/app/changePassword/submit" method="post" name="vform" onsubmit="return Validate()">
 								<div class="form-group">
 									<label>Email address</label> <br /> <input
@@ -96,9 +78,9 @@
 		
 		// SELECTING ALL ERROR DISPLAY ELEMENTS	
 		var cemail_error = document.getElementById("cemail_error");
-		var pass1_error = document.getElementById("pass_error");
-		var npass2_error = document.getElementById("npass_error");
-		var cpass3_error = document.getElementById("cpass3_error");
+		var pass_error = document.getElementById("pass_error");
+		var npass_error = document.getElementById("npass_error");
+		var cpass_error = document.getElementById("cpass_error");
 
 		// SETTING EVENT LISTENERS		
 		email.addEventListener("blur", emailVerify, true);

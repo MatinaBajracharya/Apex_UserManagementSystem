@@ -4,10 +4,10 @@
 	box-sizing: none;
 	list-style: none;
 	text-decoration: none;
-	font-family: "Josefin Slab", serif;
 }
 
 .outer {
+	font-family: Times New Roman;
 	background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
 		url(../images/office.jpg);
 	height: 100vh;
@@ -30,6 +30,11 @@
 
 .home {
 	background: #f3f5f9;
+	font-family: Arial;
+}
+
+.header{
+	font-family: "Josefin Slab", serif;
 }
 
 .wrapper {
@@ -96,4 +101,29 @@
 
 .wrapper .main_container .info div {
 	margin-bottom: 20px;
+}
+
+.dash-box{
+	text-align:Center
+}
+
+/*Pagination on table*/
+.paging-nav {
+  text-align: center;
+  padding-top: 2px;
+}
+
+.paging-nav a {
+  margin: auto 1px;
+  text-decoration: none;
+  display: inline-block;
+  padding: 1px 7px;
+  background: #4b4276;
+  color: white;
+  border-radius: 3px;
+}
+
+.paging-nav .selected-page {
+  background: #717171;
+  font-weight: bold;
 }

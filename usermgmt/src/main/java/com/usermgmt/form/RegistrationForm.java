@@ -1,15 +1,33 @@
 package com.usermgmt.form;
 
+import javax.validation.constraints.NotEmpty;
+
 public class RegistrationForm {
 
+	@NotEmpty
 	private String fname;
+	
 	private String mname;
+	
+	@NotEmpty
 	private String lname;
+	
+	@NotEmpty
 	private String email;
+	
+	@NotEmpty
 	private String pass1;
+	
+	@NotEmpty
 	private String pass2;
+	
+	@NotEmpty
 	private String ans1;
+	
+	@NotEmpty
 	private String ans2;
+	
+	@NotEmpty
 	private String role;
 	
 	

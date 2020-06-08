@@ -1,0 +1,43 @@
+section {
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: #eeeeee;
+}
+
+.fullscreen {
+  display: flex;
+  display: -webkit-flex;
+  display: -moz-flex;
+  align-items: center;
+  -webkit-align-items: center;
+  min-height: 100vh;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.bg-image {
+  background-image: url(../images/bg.jpg);
+}
+
+section,
+.container {
+  position: relative;
+  word-wrap: break-word;
+}
+
+.overlay {
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 0;
+  opacity: 0.7;
+  background-color: rgb(99, 90, 81);
+}
+
+.subtitle {
+  letter-spacing: 1em;
+  font-family: "Rubik", sans-serif;
+}

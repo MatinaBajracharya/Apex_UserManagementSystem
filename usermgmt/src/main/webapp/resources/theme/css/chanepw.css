@@ -1,82 +1,114 @@
 * {
-  margin: 0px;
-  padding: 0px;
-  box-sizing: none;
-  list-style: none;
-  text-decoration: none;
-  font-family: "Josefin Slab", serif;
+	margin: 0px;
+	padding: 0px;
+	box-sizing: none;
+	list-style: none;
+	text-decoration: none;
+	/*font-family: "Josefin Slab", serif; */
 }
 
 .home {
-  background: #f3f5f9;
+	background: #f3f5f9;
+	font-family: Arial;
+}
+
+.header{
+	font-family: "Josefin Slab", serif;
+}
+
+.dash-box{
+	text-align:Center
 }
 
 .wrapper {
-  display: flex;
-  position: relative;
+	display: flex;
+	position: relative;
 }
 
 .wrapper .sidebar {
-  position: fixed;
-  width: 200px;
-  height: 100%;
-  background: #1b3f8b;
-  padding: 30px 0;
+	font-family: "Josefin Slab", serif;
+	position: fixed;
+	width: 200px;
+	height: 100%;
+	background: #1b3f8b;
+	padding: 30px 0;
 }
 
 .wrapper .sidebar .menu {
-  color: #fff;
-  text-transform: uppercase;
-  text-align: center;
-  margin-bottom: 30px;
+	color: #fff;
+	text-transform: uppercase;
+	text-align: center;
+	margin-bottom: 30px;
 }
 
 .wrapper .sidebar ul li {
-  padding: 15px;
-  border-bottom: 1px solid #bdb8d7;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-  border-top: 1px solid rgba(225, 225, 225, 0.05);
+	padding: 15px;
+	border-bottom: 1px solid #bdb8d7;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+	border-top: 1px solid rgba(225, 225, 225, 0.05);
 }
 
 .wrapper .sidebar ul li a {
-  color: #bdb8d7;
-  display: block;
+	color: #bdb8d7;
+	display: block;
 }
 
 .wrapper .sidebar ul li a .fas {
-  width: 25px;
+	width: 25px;
 }
 
 .wrapper .sidebar ul li:hover {
-  background: #3a66a7;
+	background: #3a66a7;
 }
 
 .wrapper .sidebar ul li:hover a {
-  color: #fff;
+	color: #fff;
 }
 
 .wrapper .main_container {
-  width: 100%;
-  margin-left: 200px;
+	width: 100%;
+	margin-left: 200px;
 }
 
-.wrapper > .main_container > .header {
-  padding: 30px;
-  background: #fff;
-  color: #717171;
-  border-bottom: 1px solid #e0e4e8;
+.wrapper>.main_container>.header {
+	padding: 30px;
+	background: #fff;
+	color: #717171;
+	border-bottom: 1px solid #e0e4e8;
 }
 
 .wrapper .main_container .info {
-  margin: 20px;
-  color: #717171;
-  line-height: 25px;
+	margin: 20px;
+	color: #717171;
+	line-height: 25px;
 }
 
 .wrapper .main_container .info div {
-  margin-bottom: 20px;
+	margin-bottom: 20px;
 }
 
 .card {
-  margin-left: 30%;
+	margin-left: 30%;
 }
+
+/*Pagination on table*/
+.paging-nav {
+  text-align: center;
+  padding-top: 2px;
+}
+
+.paging-nav a {
+  margin: auto 1px;
+  text-decoration: none;
+  display: inline-block;
+  padding: 1px 7px;
+  background: #1b3f8b;
+  color: white;
+  border-radius: 3px;
+}
+
+.paging-nav .selected-page {
+  background: #717171;
+  font-weight: bold;
+}
+ 

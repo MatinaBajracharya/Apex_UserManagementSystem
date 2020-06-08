@@ -18,37 +18,19 @@
 </head>
 <body class="home">
 	<div class="wrapper">
-		<div class="sidebar">
-			<h2 class="menu">Menu</h2>
-			<ul>
-				<li><a href="http://localhost:8080/usermgmt/app/home"><i
-						class="fas fa-home"></i>Home</a></li>
-				<li><a href="http://localhost:8080/usermgmt/app/profileClient"><i
-						class="fas fa-user"></i>Profile</a></li>
-				<li><a href="http://localhost:8080/usermgmt/app/history"><i
-						class="fas fa-history"></i>History</a></li>
-				<li><a href="http://localhost:8080/usermgmt/app/home"><i
-						class="fas fa-list-alt"></i>Contact Us</a></li>
-				<c:choose>
-					<c:when test="${not empty loggedInUser}">
-						<li><a href="http://localhost:8080/usermgmt/app/logout"><i
-								class="fas fa-sign-out-alt"></i>Logout</a></li>
-					</c:when>
-				</c:choose>
-			</ul>
-		</div>
+		<jsp:include page='navClient.jsp' />
 		<div class="main_container">
 			<div class="header"style="font-size: 30px;">Change your password.</div>
 			<div class="info">
 				<div>
-					<div class="card" style="width: 30rem; margin-left: 30%;">
-						<div class="card-header">Please fill up the form below.</div>
+					<div class="card ml-auto mr-auto" style="width: 30rem;">
+						<div class="card-header" style="align:center;">Please fill up the form below.</div>
 						<div class="card-body">
 							<img
 								src="<%=request.getContextPath()%>/resources/images/user.png"
 								alt="" class="img-rounded"
 								style="height: 40%; width: 40%; margin-left: 128px;" /><br />
-							<h3 style="color: red;">${pwChangeMsg}</h3>
+							<h4 style="color:red; text-align:center">${pwChangeMsg}</h4>
 							<form action="/usermgmt/app/changePassword/submit" method="post"
 								name="vform" onsubmit="return Validate()">
 								<div class="form-group">

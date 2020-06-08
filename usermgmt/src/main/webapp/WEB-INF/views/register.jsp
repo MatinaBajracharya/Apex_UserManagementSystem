@@ -3,7 +3,7 @@
     Created on : Apr 24, 2020, 5:02:33 PM
     Author     : acer
 --%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%> 
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     isELIgnored="false"
@@ -21,68 +21,77 @@
       <div class="container" style="padding-bottom: 66px;">
         <h1 style="text-align:center; padding: 30px;">Create a New Account</h1>
         <div class="row">
-          <div class="col-md-6">
-              <div class="card info">
-                  <div class="card-body">
-                      <h5>Come join the community! Let's set up your account first. Already have an account?<a href="login"> Login</a></h5>
-                      <form:errors path="registrationForm.*"/>
-                      <form action="/usermgmt/app/submit" style="margin: 50px;" method="post" onsubmit="return Validate()" name="vform">
-		                      <h3>${pwMsg}</h3>
-		                      <h3>${regMsg}</h3>
-		                          <div class="form-group">
-		                              <label for="fname">First Name</label>
-		                              <input type="text" class="form-control" name="fname" ">
-		                              <div id="fname_error"></div>
-		                          </div>
-		                          <div class="form-group">
-		                              <label for="mname">Middle Name</label>
-		                              <input type="text" class="form-control" name="mname" id="mname">
-		                          
-		                          </div>
-		                          <div class="form-group">
-		                              <label for="lname">Last Name</label>
-		                              <input type="text" class="form-control" name="lname">
-		                              <div id="lname_error"></div>
-		                          </div>
-		                          <div class="form-group">
-		                              <label for="exampleInputEmail1">Email address</label>
-		                              <input type="email" class="form-control" name="email" aria-describedby="emailHelp">
-		                              <div id="email_error"></div>
-		                          </div>
-		                          <div class="form-group">
-		                              <label for="Password1">Password</label>
-		                              <input type="password" class="form-control" name="pass1">
-		                              <div id="pass1_error"></div>
-		                          </div>
-		                          <div class="form-group">
-		                              <label for="Password2">Confirm Password</label>
-		                              <input type="password" class="form-control" name="pass2">
-		                              <div id="pass2_error"></div>
-		                          </div>
-		                  </div>
-		              </div>
-		          </div>
-		          <div class="col-md-6">
-		              <div class="card info" style="width: 35rem; margin-left: 70px;">
-		                  <div class="card-body">
-		                      <h5 class="card-title">Help us keep your account secure.</h5>
-		                      <h6 class="card-subtitle mb-2 text-muted">Please answer the security questions.</h6> <br>
-		                      <div class="form-group">
-		                          <label>Which city were you born in?</label>
-		                          <input type="text" class="form-control"  name="ans1" placeholder="Your answer here..">
-		                          <div id="ans1_error"></div>
-		                      </div>
-		                      <div class="form-group">
-		                          <label>What is the name of your pet?</label>
-		                          <input type="text" class="form-control" name="ans2" id="ans2" placeholder="Your answer here..">
-		                           <div id="ans2_error"></div>
-		                      </div> <br>
-		                      <button class="btn btn-primary" type="Submit">Submit</button>
-		                  </div>
-		              </div>
-		          </div>
-              </form>
-      </div>
+			<form:errors path="registrationForm.*"/>
+			<form action="/usermgmt/app/submit" style="margin: 50px;" method="post" onsubmit="return Validate()" name="vform">
+				<div class="col-md-6 float-left">
+					<div class="card info">
+						<div class="card-body">
+							<h5>
+								Come join the community! Let's set up your account first.
+								Already have an account?<a href="login"> Login</a>
+							</h5>
+							<h4 style="color:red; text-align:center">${pwMsg}</h4>
+							<h4 style="color:red; text-align:center">${regMsg}</h4>
+							<div class="form-group">
+								<label for="fname">First Name</label> <input type="text"
+									class="form-control" name="fname">
+								<div id="fname_error"></div>
+							</div>
+							<div class="form-group">
+								<label for="mname">Middle Name</label> <input type="text"
+									class="form-control" name="mname" id="mname">
+	
+							</div>
+							<div class="form-group">
+								<label for="lname">Last Name</label> <input type="text"
+									class="form-control" name="lname">
+								<div id="lname_error"></div>
+							</div>
+							<div class="form-group">
+								<label for="exampleInputEmail1">Email address</label> <input
+									type="email" class="form-control" name="email"
+									aria-describedby="emailHelp">
+								<div id="email_error"></div>
+							</div>
+							<div class="form-group">
+								<label for="Password1">Password</label> <input type="password"
+									class="form-control" name="pass1">
+								<div id="pass1_error"></div>
+							</div>
+							<div class="form-group">
+								<label for="Password2">Confirm Password</label> <input
+									type="password" class="form-control" name="pass2">
+								<div id="pass2_error"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 float-right">
+					<div class="card info" style="width: 35rem; margin-left: 70px;">
+						<div class="card-body">
+							<h5 class="card-title">Help us keep your account secure.</h5>
+							<h6 class="card-subtitle mb-2 text-muted">Please answer the
+								security questions.</h6>
+							<br>
+							<div class="form-group">
+								<label>Which city were you born in?</label> <input type="text"
+									class="form-control" name="ans1"
+									placeholder="Your answer here..">
+								<div id="ans1_error"></div>
+							</div>
+							<div class="form-group">
+								<label>What is the name of your pet?</label> <input type="text"
+									class="form-control" name="ans2" id="ans2"
+									placeholder="Your answer here..">
+								<div id="ans2_error"></div>
+							</div>
+							<br>
+							<button class="btn btn-primary" type="Submit">Submit</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
     </div>
     
     <!--Adding JavaScript  -->
@@ -128,7 +137,7 @@
 		}
 		if(lname.value == ""){
 			lname.style.border = "1px solid red";
-			document.getElementById('lanme_error').style.color = "red";
+			document.getElementById('lname_error').style.color = "red";
 			lname_error.textContent = "Last Name is required.";
 			lname.focus();
 			return false;
@@ -147,6 +156,15 @@
 			pass1.focus();
 			return false;
 		}
+		
+		if(pass1.length < 8){
+			pass1.style.border = "1px solid red";
+			document.getElementById('pass1_error').style.color = "red";
+			pass1_error.textContent = "Password should be atleast 8 characters.";
+			pass1.focus();
+			return false;
+		}
+		
 		if(pass2.value == ""){
 			pass2.style.border = "1px solid red";
 			document.getElementById('pass2_error').style.color = "red";
@@ -169,7 +187,7 @@
 			return false;
 		}
 		
-		 if(password1.value != password2.value){
+		 if(pass1.value != pass2.value){
 			pass1.style.border = "1px solid red";
 			pass2.style.border = "1px solid red";
 			pass2_error.innerHTML = "Passwords do not match";
@@ -206,18 +224,18 @@
 	
 	// VERIIFYING PASSWORD
 	function password1Verify(){
-		if (password1.value != ""){
-			password1.style.border = "1px solid #5E6E66";
-			password1_error.innerHTML = "";
+		if (pass1.value != "" && pass1.value < 8){
+			pass1.style.border = "1px solid #5E6E66";
+			pass1_error.innerHTML = "";
 			return true;
 		}
 	}
 	
 	// VERIFYING CONIFRM PASSWORD
 	function password2Verify(){
-		if (password2.value != ""){
-			password2.style.border = "1px solid #5E6E66";
-			password2_error.innerHTML = "";
+		if (pass2.value != ""){
+			pass2.style.border = "1px solid #5E6E66";
+			pass2_error.innerHTML = "";
 			return true;
 		}
 	}

@@ -40,7 +40,7 @@
                     <h5 style="color:green;">${regSuccess}</h5>
 	                <h5 style="color:green;">${pwUpdatedSuccess}</h5>
 	                <h5 style="color:red;"> ${userMsg}</h5>
-                    <form:errors path="loginForm.*"/>
+                    <form:errors path="loginForm.*"></form:errors>
                     <form method="post" action="/usermgmt/app/submitLogin" name="vform" onsubmit="return Validate()">
                       <div class="form-group">
                         <label>Email address</label>

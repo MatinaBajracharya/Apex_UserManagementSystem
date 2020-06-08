@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
 <link
 	href="https://fonts.googleapis.com/css2?family=Josefin+Slab:wght@700&display=swap"
 	rel="stylesheet" />
@@ -18,66 +19,81 @@
 </head>
 <body class="home">
 	<div class="wrapper">
-		<div class="sidebar">
-			<h2 class="menu">Menu</h2>
-			<ul>
-				<li><a href="http://localhost:8080/usermgmt/app/admin/home"><i
-						class="fas fa-home"></i>Dashboard</a></li>
-				<li><a href="http://localhost:8080/usermgmt/app/admin/profile"><i
-						class="fas fa-user"></i>Profile</a></li>
-				<li><a href="http://localhost:8080/usermgmt/app/history"><i
-						class="fas fa-history"></i>History</a></li>
-				<li><a href="http://localhost:8080/usermgmt/app/users"><i class="fas fa-users"></i>Users</a></li>
-				<li><a href="http://localhost:8080/usermgmt/app/users"><i
-						class="fas fa-clipboard"></i>Report</a></li>
-				<c:choose>
-					<c:when test="${not empty loggedInUser}">
-						<li><a href="http://localhost:8080/usermgmt/app/logout">
-								<i class="fas fa-sign-out-alt"></i>Logout</a></li>
-					</c:when>
-				</c:choose>
-			</ul>
-		</div>
+		<jsp:include page="navAdmin.jsp" />
 		<div class="main_container">
-			<div class="header">Users</div>
+			<div class="header" style="font-size: 30px;">
+				Users
+				<form method="post"
+					action="http://localhost:8080/usermgmt/app/users/search"
+					class="form-inline my-2 my-lg-0 float-right">
+					<input class="form-control mr-sm-2" type="search"
+						placeholder="Search" name="searchString" aria-label="Search"
+						required />
+					<button class="btn btn-outline-success my-2 my-sm-0" type="submit"
+						style="text-align: right;">Search</button>
+				</form>
+			</div>
 			<div class="info">
 				<a class="btn btn-primary"
 					href="http://localhost:8080/usermgmt/app/newuser" role="button"
 					style="float: right; margin-bottom: 25px;">Create New User</a>
 				<div class="clearfix"></div>
 				<div style="text-align: center;">
-					<table class="table"
-						style="width: 80%; margin-left: auto; margin-right: auto;">
-						<thead class="thead-dark">
-							<tr>
-								<th scope="col">First Name</th>
-								<th scope="col">Last Name</th>
-								<th scope="col">Role</th>
-								<th scope="col">Action</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach var="user" items="${allUsers}">
-								<tr>
-									<td><c:out value="${user.firstName}" /></td>
-									<td><c:out value="${user.lastName}" /></td>
-									<td><c:out value="${user.role}" /></td>
-									<td><a href="http://localhost:8080/usermgmt/app/user/edit?id=${user.id}" class="btn btn-secondary">Edit User Info</a>
-									<form method ="post" action="http://localhost:8080/usermgmt/app/user/delete"><br>
-									<input type="hidden" name="deleteUserId" value="${user.id}" />
-									<input type="hidden" name="email" value="${user.email}" />							
-									<input type="submit" value= "DELETE USER" class="btn btn-danger" role="button">
-									</form>
-									</td>
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
+					<h3 style="color: red; text-align: center">${msg}</h3>
+					<c:choose>
+						<c:when test="${not empty allUsers}">
+							<table class="table table-striped table-bordered" id="tableData"
+								style="width: 80%; margin-left: auto; margin-right: auto;">
+								<thead class="thead-dark">
+									<tr>
+										<th scope="col">First Name</th>
+										<th scope="col">Middle Name</th>
+										<th scope="col">Last Name</th>
+										<th scope="col">Email</th>
+										<th scope="col">Role</th>
+										<th scope="col">Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach var="user" items="${allUsers}">
+										<tr>
+											<td><c:out value="${user.firstName}" /></td>
+											<td><c:out value="${user.middleName}" /></td>
+											<td><c:out value="${user.lastName}" /></td>
+											<td><c:out value="${user.email}" /></td>
+											<td><c:out value="${user.role}" /></td>
+											<td><a
+												href="http://localhost:8080/usermgmt/app/user/edit?id=${user.id}"
+												class="btn btn-secondary">Edit User Info</a>
+												<form method="post"
+													action="http://localhost:8080/usermgmt/app/user/delete"
+													style="display: inline-block">
+													<input type="hidden" name="deleteUserId" value="${user.id}" />
+													<input type="hidden" name="email" value="${user.email}" />
+													<input type="submit" value="DELETE USER"
+														class="btn btn-danger" role="button">
+												</form></td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</c:when>
+					</c:choose>
 				</div>
 			</div>
 		</div>
 	</div>
 
 	<script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+	<script type="text/javascript"
+		src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script
+		src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/paging.js"></script>
+	<script type="text/javascript">
+	            $(document).ready(function() {
+	                $('#tableData').paging({limit:11});
+	            });
+	</script>
 </body>
 </html>

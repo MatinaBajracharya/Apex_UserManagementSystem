@@ -39,7 +39,9 @@ public class UserController {
 
 	@Autowired
 	HistoryService historyService;
-
+	
+	/*Displaying the users and list of users is the role is admin.*/
+	
 	@RequestMapping("/users")
 	public ModelAndView users(HttpSession session) {
 		ModelAndView mav = null;
@@ -56,6 +58,7 @@ public class UserController {
 		return mav;
 	}
 
+	/*Displaying change password page with respect to the logged in user's roles*/
 	@RequestMapping("/changePassword")
 	public ModelAndView passwordChange(HttpSession session) {
 		ModelAndView mav = null;
@@ -71,6 +74,8 @@ public class UserController {
 
 	}
 
+	/*Getting all user entered data and checking if it meets the criteria.
+	 * If all the criteria is met, then password is changed and history table is updated.*/
 	@RequestMapping("/changePassword/submit")
 	public ModelAndView passwordChangeSubmit(@ModelAttribute("changePassword") ChangePasswordForm changePasswordForm,
 			HttpSession session) {
@@ -165,13 +170,18 @@ public class UserController {
 		}
 		return mav;
 	}
-
+	
+	/*Displaying forgot password's jsp*/
 	@RequestMapping("/forgotPassword")
 	public ModelAndView forgotPassword(HttpSession session) {
 		ModelAndView mav = null;
 		mav = new ModelAndView("forgotPassword");
 		return mav;
 	}
+	
+	/*On pressing submit, all the criteria is checked.
+	 * If all the criteria is fulfilled then password is changed and history table is updated.
+	 * The user is redirected to login page with a success message.*/
 
 	@RequestMapping("/forgotPassword/submit")
 	public ModelAndView forgotPasswordSubmit(
@@ -199,6 +209,10 @@ public class UserController {
 		}
 		return mav;
 	}
+	
+	/*When deleting the user, if logged in user's id and existing user's if do not match, the user is deleted.
+	 * Admin is redirected to users page.
+	 * History table is updated.*/
 
 	@RequestMapping("/user/delete")
 	public ModelAndView deleteUser(@ModelAttribute("deleteUser") DeleteUser user, HttpSession session) {
@@ -212,6 +226,9 @@ public class UserController {
 		return mav;
 	}
 
+	/*Edit user's jsp is displayed.
+	 * When admin is editing a user's information, the id is taken and user's information is accessed to display on the form.*/
+	
 	@RequestMapping("/user/edit")
 	public ModelAndView editUser(@RequestParam("id") Integer id, HttpSession session) {
 		User loggedInUser = (User) session.getAttribute("loggedInUser");
@@ -224,6 +241,9 @@ public class UserController {
 		mav.addObject("existingUser", existingUser);
 		return mav;
 	}
+	
+	/*On pressing submit, all the criteria is checked and user's information is edited.
+	 * History table is updated.*/
 
 	@RequestMapping("/user/edit/submit")
 	public ModelAndView submitEditUser(@ModelAttribute("updateProfileForm") UpdateProfileForm updateProfileForm,

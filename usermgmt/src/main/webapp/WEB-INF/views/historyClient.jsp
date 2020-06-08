@@ -14,28 +14,15 @@
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/resources/css/style.css"
 	type="text/css" />
-<title>Home</title>
+<title>History</title>
 </head>
 <body class="home">
 	<div class="wrapper">
-		<div class="sidebar">
-			<h2 class="menu">Menu</h2>
-			<ul>
-				<li><a href="http://localhost:8080/usermgmt/app/home"><i class="fas fa-home"></i>Home</a></li>
-				<li><a href="http://localhost:8080/usermgmt/app/profile"><i class="fas fa-user"></i>Profile</a></li>
-				<li><a href="http://localhost:8080/usermgmt/app/history"><i class="fas fa-history"></i>History</a></li>
-				<li><a href="http://localhost:8080/usermgmt/app/home"><i class="fas fa-list-alt"></i>Contact Us</a></li>
-				<c:choose>
-					<c:when test="${not empty loggedInUser}">
-						<li><a href="http://localhost:8080/usermgmt/app/logout"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
-					</c:when>
-				</c:choose>
-			</ul>
-		</div>
+	<jsp:include page='navClient.jsp' />
 		<div class="main_container">
-			<div class="header">History.</div><br>
+			<div class="header" style="font-size:30px;">History</div><br>
 				<div style="text-align: center;">
-					<table class="table" style="width:80%;margin-left: auto; margin-right: auto;">
+					<table class="table table-striped table-bordered" id="tableData" style="width:80%;margin-left: auto; margin-right: auto;">
 						<thead class="thead-dark">
 							<tr>
 							 	<th scope="col">First Name</th>
@@ -62,5 +49,15 @@
 	</div>
 
 	<script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+	<script type="text/javascript"
+		src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script
+		src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/paging.js"></script>
+	<script type="text/javascript">
+	            $(document).ready(function() {
+	                $('#tableData').paging({limit:11});
+	            });
+	</script>
 </body>
 </html>
