@@ -24,7 +24,11 @@ public class ReportController {
 	@Autowired
 	ReportService reportService;
 
-	/*Displaying report page*/
+	/**
+	 * Displaying report page
+	 * @param session
+	 * @return mav
+	 */
 	@RequestMapping("/report")
 	public ModelAndView displayReportPage(HttpSession session) {
 		User loggedInUser = (User) session.getAttribute("loggedInUser");
@@ -36,7 +40,12 @@ public class ReportController {
 		return mav;
 	}
 
-	/*Displaying the data between all date ranges*/
+	/**
+	 * Displaying the data between all date ranges
+	 * @param reportForm
+	 * @param session
+	 * @return mav
+	 */
 	@RequestMapping("/report/display")
 	public ModelAndView displayReportData(@ModelAttribute("reportForm") ReportForm reportForm, HttpSession session) {
 		User loggedInUser = (User) session.getAttribute("loggedInUser");

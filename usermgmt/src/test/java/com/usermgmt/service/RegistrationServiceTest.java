@@ -3,6 +3,8 @@ package com.usermgmt.service;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.sql.SQLException;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -23,6 +25,10 @@ public class RegistrationServiceTest {
 	
 	@InjectMocks
 	RegistrationService registrationService = new RegistrationServiceImpl();	
+	
+	/**
+	 * Preparing mock data instead of calling the actual database then comparing the expected and actual results.
+	 */
 	
 	@Test
 	public void isPasswordAndConfirmPasswordSameTest_WithDifferentPasswords() {

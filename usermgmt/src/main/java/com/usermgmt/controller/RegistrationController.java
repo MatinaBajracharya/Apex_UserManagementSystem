@@ -36,17 +36,22 @@ public class RegistrationController {
 	@Autowired
 	UserService userService;
 
-	/* Displaying the register page. */
+	/**
+	 * Displaying the register page.
+	 * @return mav
+	 */
 	@RequestMapping("/register")
 	public ModelAndView register() {
 		ModelAndView mav = new ModelAndView("register");
 		return mav;
 	}
 
-	/*
+	/**
 	 * The logged in user's role is checked, if the role is admin, then the adding
 	 * new user form is displayed. Else, the user is asked to login if he/she is
 	 * directly accessing the page through the URL.
+	 * @param session
+	 * @return mav
 	 */
 	@RequestMapping("/newuser")
 	public ModelAndView registerNewUser(HttpSession session) {
@@ -60,12 +65,16 @@ public class RegistrationController {
 		return mav;
 	}
 
-	/*
-	 * When logged in user is null, registration form is displayed and upon pressing
+	/**
+	 *  When logged in user is null, registration form is displayed and upon pressing
 	 * submit, all the fields are checked. When logged in user is not null,
 	 * registration form is displayed to add new user and upon pressing submit, all
 	 * the fields are checked. If the criteria is met, the user is added and history
 	 * table is updated.
+	 * @param registrationForm
+	 * @param result
+	 * @param session
+	 * @return mav
 	 */
 
 	@RequestMapping("/submit")
@@ -79,22 +88,22 @@ public class RegistrationController {
 			boolean isSame = registrationService.isPasswordAndConfirmPasswordSame(registrationForm);
 			if (!isSame && loggedInUser != null && loggedInUser.getRole().equalsIgnoreCase("ADMIN")) {
 				mav = new ModelAndView("newuser");
-				mav.addObject("pwMsg", "Passwords do not match");
+				mav.addObject("pwMsg", "Passwords do not match.");
 			} else if (registrationForm.getPass1().length() < 8 && loggedInUser != null
 					&& loggedInUser.getRole().equalsIgnoreCase("ADMIN")) {
 				mav = new ModelAndView("newuser");
-				mav.addObject("pwMsg", "Passwords must be atleast 8 characters");
+				mav.addObject("pwMsg", "Passwords must be atleast 8 characters.");
 			} else if (loggedInUser == null && registrationForm.getPass1().length() < 8) {
-				mav.addObject("pwMsg", "Passwords must be atleast 8 characters");
+				mav.addObject("pwMsg", "Passwords must be atleast 8 characters.");
 			} else if (!isSame && loggedInUser == null) {
-				mav.addObject("pwMsg", "Passwords do not match");
+				mav.addObject("pwMsg", "Passwords do not match.");
 			} else {
 				if (loggedInUser != null && loggedInUser.getRole().equalsIgnoreCase("ADMIN")) {
 					mav = new ModelAndView("users");
 					boolean saveUser = registrationService.saveUser(registrationForm, loggedInUser);
 					if (!saveUser) {
 						mav = new ModelAndView("newuser");
-						mav.addObject("regMsg", "Email has already been taken");
+						mav.addObject("regMsg", "Email has already been taken.");
 					} else {
 						historyService.addActivityHistory(loggedInUser, registrationForm.getEmail(), ADDED_USER);
 						mav.setView(new RedirectView("/app/users", true, true, false));
@@ -110,10 +119,10 @@ public class RegistrationController {
 					}
 					if (!saveUser) {
 						mav = new ModelAndView("register");
-						mav.addObject("regMsg", "Email has already been taken");
+						mav.addObject("regMsg", "Email has already been taken.");
 					} else {
 						mav = new ModelAndView("login");
-						mav.addObject("regSuccess", "You have been registered successfully, Please Login to continue.");
+						mav.addObject("regSuccess", "You have been registered successfully. Please login to continue.");
 						User newRegistrant = userService.findUserByEmail(registrationForm.getEmail());
 						historyService.addActivityHistory(newRegistrant, null, REGISTERED);
 					}

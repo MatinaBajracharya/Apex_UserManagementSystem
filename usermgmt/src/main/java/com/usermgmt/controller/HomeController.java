@@ -18,8 +18,12 @@ public class HomeController {
 	@Autowired 
 	HomeService homeService;
 	
-	/*After the successful login, client is directed to client's home page.
-	 * If an error occurs, error page is displayed.*/
+	/**
+	 * After the successful login, client is directed to client's home page.
+	 * If an error occurs, error page is displayed.
+	 * @param session
+	 * @return mav
+	 */
 	
 	@RequestMapping("/home")
 	public ModelAndView home(HttpSession session) {
@@ -37,8 +41,12 @@ public class HomeController {
 		return mav;
 	}
 
-	/*After the successful login, admin is directed to admin's home page.
-	 * If an error occurs, error page is displayed.*/
+	/**
+	 * After the successful login, admin is directed to admin's home page.
+	 * If an error occurs, error page is displayed.
+	 * @param session
+	 * @return mav
+	 */
 	
 	@RequestMapping("/admin/home")
 	public ModelAndView adminHome(HttpSession session) {

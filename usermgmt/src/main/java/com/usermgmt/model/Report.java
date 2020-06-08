@@ -5,6 +5,8 @@ import java.util.Date;
 public class Report implements Comparable<Report> {
 	private String firstName;
 	
+	private String middleName;
+	
 	private String lastName;
 	
 	private String email;
@@ -37,6 +39,14 @@ public class Report implements Comparable<Report> {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+	
+	public String getMiddleName() {
+		return middleName;
+	}
+
+	public void setMiddleName(String middleName) {
+		this.middleName = middleName;
+	}
 
 	public String getEmail() {
 		return email;
@@ -51,9 +61,9 @@ public class Report implements Comparable<Report> {
 	}
 
 	public void setActivity(String activity) {
-		if (activity.equalsIgnoreCase("ADDED_USER") || activity.equalsIgnoreCase("REGISTERED")) {
-			activity = "ADDED OR REGISTERED";
-		}
+//		if (activity.equalsIgnoreCase("ADDED_USER") || activity.equalsIgnoreCase("REGISTERED")) {
+//			activity = "ADDED OR REGISTERED";
+//		}
 		this.activity = activity;
 	}
 

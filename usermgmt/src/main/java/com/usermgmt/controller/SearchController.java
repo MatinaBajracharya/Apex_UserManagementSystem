@@ -22,7 +22,11 @@ public class SearchController {
 	@Autowired 
 	SearchService searchService;
 	
-	/*Searching for users by getting the value from the form.*/
+	/**
+	 * Searching for users by getting the value from the form.
+	 * @param search
+	 * @return mav
+	 */
 	@RequestMapping("/users/search")
 	public ModelAndView searchUser(@ModelAttribute("searchString") @Valid SearchForm search) {
 		ModelAndView mav = new ModelAndView("users");

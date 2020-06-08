@@ -49,6 +49,7 @@
 							<thead class="thead-dark">
 								<tr>
 									<th scope="col">First Name</th>
+									<th scope="col">Middle Name</th>
 									<th scope="col">Last Name</th>
 									<th scope="col">Role</th>
 									<th scope="col">Action</th>
@@ -59,6 +60,7 @@
 								<c:forEach var="report" items="${report}">
 									<tr>
 										<td><c:out value="${report.firstName}" /></td>
+										<td><c:out value="${report.middleName}" /></td>
 										<td><c:out value="${report.lastName}" /></td>
 										<td><c:out value="${report.email}" /></td>
 										<td><c:out value="${report.activity}" /></td>

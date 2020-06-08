@@ -27,6 +27,11 @@ public class ReportServiceTest {
 	@InjectMocks
 	ReportService reportService = new ReportServiceImpl();
 	
+	/**
+	 * Preparing mock data instead of calling the actual database then comparing the expected and actual results.
+	 * @throws SQLException
+	 */
+	
 	@Test
 	public void getDataBetweenDates() throws SQLException {
 		ReportForm reportForm = new ReportForm();

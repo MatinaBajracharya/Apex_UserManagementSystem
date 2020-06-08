@@ -72,7 +72,7 @@ public class HistoryDao {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			connection = DriverManager.getConnection(URL, "root", null);
-			String query = "SELECT u.id, u.first_name, u.last_name, u.email,"
+			String query = "SELECT u.id, u.first_name,u.middle_name, u.last_name, u.email,"
 					+ " u.role, h.activity, h.new_user, h.date "
 					+ " FROM user u inner join history h on u.id = h.user_id "
 					+ "where u.status='ACTIVE' order by h.date desc";
@@ -83,6 +83,7 @@ public class HistoryDao {
 				History history = new History();
 				history.setUserId(result.getInt("id"));
 				history.setFirstName(result.getString("first_name"));
+				history.setMiddleName(result.getString("middle_name"));
 				history.setLastName(result.getString("last_name"));
 				history.setEmail(result.getString("email"));
 				history.setRole(result.getString("role"));
@@ -113,7 +114,7 @@ public class HistoryDao {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			connection = DriverManager.getConnection(URL, "root", null);
-			String query = "SELECT u.id, u.first_name, u.last_name, u.email, u.role, h.activity, h.date  FROM user u inner join history h on u.id = h.user_id where u.id = ? order by h.date desc";
+			String query = "SELECT u.id, u.first_name,u.middle_name, u.last_name, u.email, u.role, h.activity, h.date  FROM user u inner join history h on u.id = h.user_id where u.id = ? order by h.date desc";
 			stmt = connection.prepareStatement(query);
 			stmt.setInt(1, user.getId());
 			ResultSet result = stmt.executeQuery();
@@ -122,6 +123,7 @@ public class HistoryDao {
 				History history = new History();
 				history.setUserId(result.getInt("id"));
 				history.setFirstName(result.getString("first_name"));
+				history.setMiddleName(result.getString("middle_name"));
 				history.setLastName(result.getString("last_name"));
 				history.setEmail(result.getString("email"));
 				history.setRole(result.getString("role"));
@@ -152,7 +154,7 @@ public class HistoryDao {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			connection = DriverManager.getConnection(URL, "root", null);
-			String query = "SELECT u.first_name, u.last_name, u.email, h.activity, h.date "
+			String query = "SELECT u.first_name, u.middle_name, u.last_name, u.email, h.activity, h.date "
 					+ "FROM user u inner join history h on u.email = h.new_user " + 
 					"			where (h.activity = 'DELETED_USER'" + 
 					"			or h.activity = 'ADDED_USER'" + 
@@ -167,6 +169,7 @@ public class HistoryDao {
 			while (result.next()) {
 				Report report = new Report();
 				report.setFirstName(result.getString("first_name"));
+				report.setMiddleName(result.getString("middle_name"));
 				report.setLastName(result.getString("last_name"));
 				report.setEmail(result.getString("email"));
 				report.setActivity(result.getString("activity"));
@@ -182,6 +185,13 @@ public class HistoryDao {
 		return reportList;
 	}
 	
+	/**
+	 * Getting the user enter data through service layer to dislay in history.jsp.
+	 * @param from
+	 * @param to
+	 * @return
+	 * @throws SQLException
+	 */
 	public List<Report> getSelfRegisteredClientsReport(String from, String to) throws SQLException {
 		Connection connection = null;
 		PreparedStatement stmt = null;
@@ -189,7 +199,7 @@ public class HistoryDao {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			connection = DriverManager.getConnection(URL, "root", null);
-			String query = "SELECT u.first_name, u.last_name, u.email, h.activity, h.date "
+			String query = "SELECT u.first_name, u.middle_name, u.last_name, u.email, h.activity, h.date "
 					+ "FROM user u inner join history h on u.id = h.user_id " + 
 					"			where h.activity = 'REGISTERED'" + 
 					"			and h.date >= ?" + 
@@ -202,6 +212,7 @@ public class HistoryDao {
 			while (result.next()) {
 				Report report = new Report();
 				report.setFirstName(result.getString("first_name"));
+				report.setMiddleName(result.getString("middle_name"));
 				report.setLastName(result.getString("last_name"));
 				report.setEmail(result.getString("email"));
 				report.setActivity(result.getString("activity"));

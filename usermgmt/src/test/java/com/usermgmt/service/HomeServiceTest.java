@@ -2,6 +2,7 @@ package com.usermgmt.service;
 
 import static org.junit.Assert.assertEquals;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +27,10 @@ public class HomeServiceTest {
 	
 	@InjectMocks
 	HomeService homeService = new HomeServiceImpl();
+	
+	/**
+	 * Preparing mock data instead of calling the actual database then comparing the expected and actual results.
+	 */
 	
 	@Test
 	public void getAdminCountTest() {

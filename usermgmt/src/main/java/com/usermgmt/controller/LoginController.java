@@ -28,16 +28,25 @@ public class LoginController {
 	@Autowired 
 	HistoryService historyService;
 
-	/*Showing the login page*/
+	/**
+	 * Showing the login page
+	 * @return mav
+	 */
 	@RequestMapping("/login")
 	public ModelAndView login() {
 		ModelAndView mav = new ModelAndView("login");
 		return mav;
 	}
-
-	/*When submit button is pressed, the id of the user is taken to determine the roles of users.
+	
+	/**
+	 * When submit button is pressed, the id of the user is taken to determine the roles of users.
 	 * Based on the roles, the users are directed to their respective dashboards. 
-	 * The record of logging in is also saved in the history table.*/
+	 * The record of logging in is also saved in the history table.
+	 * @param loginForm
+	 * @param result
+	 * @param session
+	 * @return mav
+	 */
 	
 	@RequestMapping("/submitLogin")
 	public ModelAndView login(@ModelAttribute("loginForm") @Valid LoginForm loginForm, BindingResult result,

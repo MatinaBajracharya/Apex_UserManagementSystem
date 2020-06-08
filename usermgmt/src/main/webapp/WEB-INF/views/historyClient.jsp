@@ -26,6 +26,7 @@
 						<thead class="thead-dark">
 							<tr>
 							 	<th scope="col">First Name</th>
+							 	<th scope="col">Middle Name</th>
 							    <th scope="col">Last Name</th>
 							    <th scope="col">Role</th>
 							    <th scope="col">Activity</th>
@@ -36,6 +37,7 @@
 							<c:forEach var="history" items="${allHistory}">
 							<tr>
 								<td><c:out value="${history.firstName}" /></td>
+								<td><c:out value="${history.middleName}" /></td>
 								<td><c:out value="${history.lastName}" /></td>
 								<td><c:out value="${history.role}" /></td>
 								<td><c:out value="${history.activity}" /></td>

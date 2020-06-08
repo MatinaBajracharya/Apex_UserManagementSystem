@@ -40,7 +40,11 @@ public class UserController {
 	@Autowired
 	HistoryService historyService;
 	
-	/*Displaying the users and list of users is the role is admin.*/
+	/**
+	 * Displaying the users and list of users is the role is admin.
+	 * @param session
+	 * @return mav
+	 */
 	
 	@RequestMapping("/users")
 	public ModelAndView users(HttpSession session) {
@@ -58,7 +62,11 @@ public class UserController {
 		return mav;
 	}
 
-	/*Displaying change password page with respect to the logged in user's roles*/
+	/**
+	 * Displaying change password page with respect to the logged in user's roles
+	 * @param session
+	 * @return mav
+	 */
 	@RequestMapping("/changePassword")
 	public ModelAndView passwordChange(HttpSession session) {
 		ModelAndView mav = null;
@@ -74,8 +82,13 @@ public class UserController {
 
 	}
 
-	/*Getting all user entered data and checking if it meets the criteria.
-	 * If all the criteria is met, then password is changed and history table is updated.*/
+	/**
+	 * Getting all user entered data and checking if it meets the criteria.
+	 * If all the criteria is met, then password is changed and history table is updated.
+	 * @param changePasswordForm
+	 * @param session
+	 * @return mav
+	 */
 	@RequestMapping("/changePassword/submit")
 	public ModelAndView passwordChangeSubmit(@ModelAttribute("changePassword") ChangePasswordForm changePasswordForm,
 			HttpSession session) {
@@ -166,12 +179,16 @@ public class UserController {
 			session.removeAttribute("loggedInUser");
 			session.invalidate();
 			mav = new ModelAndView("login");
-			mav.addObject("pwUpdatedSuccess", "Password Updated, login to continue");
+			mav.addObject("pwUpdatedSuccess", "Password updated. Please login to continue.");
 		}
 		return mav;
 	}
 	
-	/*Displaying forgot password's jsp*/
+	/**
+	 * Displaying forgot password's jsp
+	 * @param session
+	 * @return mav
+	 */
 	@RequestMapping("/forgotPassword")
 	public ModelAndView forgotPassword(HttpSession session) {
 		ModelAndView mav = null;
@@ -179,9 +196,13 @@ public class UserController {
 		return mav;
 	}
 	
-	/*On pressing submit, all the criteria is checked.
+	/**
+	 * On pressing submit, all the criteria is checked.
 	 * If all the criteria is fulfilled then password is changed and history table is updated.
-	 * The user is redirected to login page with a success message.*/
+	 * The user is redirected to login page with a success message.
+	 * @param forgotPasswordForm
+	 * @return mav
+	 */
 
 	@RequestMapping("/forgotPassword/submit")
 	public ModelAndView forgotPasswordSubmit(
@@ -210,9 +231,14 @@ public class UserController {
 		return mav;
 	}
 	
-	/*When deleting the user, if logged in user's id and existing user's if do not match, the user is deleted.
+	/**
+	 * When deleting the user, if logged in user's id and existing user's if do not match, the user is deleted.
 	 * Admin is redirected to users page.
-	 * History table is updated.*/
+	 * History table is updated.
+	 * @param user
+	 * @param session
+	 * @return mav
+	 */
 
 	@RequestMapping("/user/delete")
 	public ModelAndView deleteUser(@ModelAttribute("deleteUser") DeleteUser user, HttpSession session) {
@@ -226,8 +252,13 @@ public class UserController {
 		return mav;
 	}
 
-	/*Edit user's jsp is displayed.
-	 * When admin is editing a user's information, the id is taken and user's information is accessed to display on the form.*/
+	/**
+	 * Edit user's jsp is displayed.
+	 * When admin is editing a user's information, the id is taken and user's information is accessed to display on the form.
+	 * @param id
+	 * @param session
+	 * @return mav
+	 */
 	
 	@RequestMapping("/user/edit")
 	public ModelAndView editUser(@RequestParam("id") Integer id, HttpSession session) {
@@ -242,8 +273,14 @@ public class UserController {
 		return mav;
 	}
 	
-	/*On pressing submit, all the criteria is checked and user's information is edited.
-	 * History table is updated.*/
+	/**
+	 * On pressing submit, all the criteria is checked and user's information is edited.
+	 * History table is updated.
+	 * @param updateProfileForm
+	 * @param id
+	 * @param session
+	 * @return mav
+	 */
 
 	@RequestMapping("/user/edit/submit")
 	public ModelAndView submitEditUser(@ModelAttribute("updateProfileForm") UpdateProfileForm updateProfileForm,

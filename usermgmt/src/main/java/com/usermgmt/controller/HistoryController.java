@@ -20,9 +20,13 @@ public class HistoryController {
 	@Autowired
 	HistoryService historyService;
 	
-	/*If the role is set as admin, then they are directed to admin's dashboard. 
+	/**
+	 * If the role is set as admin, then they are directed to admin's dashboard. 
 	 * If  the role is set as admin, then they are directed to client's dashboard.
-	 * Else, an error is thrown */
+	 * Else, an error is thrown
+	 * @param session
+	 * @return mav
+	 */
 	
 	@RequestMapping("/history")
 	public ModelAndView view(HttpSession session) {

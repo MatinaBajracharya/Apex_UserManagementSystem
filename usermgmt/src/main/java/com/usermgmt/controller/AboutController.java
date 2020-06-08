@@ -8,7 +8,10 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/app")
 public class AboutController {
 	
-	//Calling the about page
+	/**
+	 * Calling the about page
+	 * @return mav
+	 */
 	@RequestMapping("/about")
 	public ModelAndView about() {
 		ModelAndView mav = new ModelAndView("aboutus");

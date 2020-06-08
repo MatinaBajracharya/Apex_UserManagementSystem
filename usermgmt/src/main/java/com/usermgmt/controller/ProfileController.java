@@ -26,8 +26,12 @@ public class ProfileController {
 	@Autowired
 	HistoryService historyService;
 
-	/*Based on the role of the logged in user, they are directed to their respective profile pages.
-	 * If any error occurs, error  page is shown.*/
+	/**
+	 * Based on the role of the logged in user, they are directed to their respective profile pages.
+	 * If any error occurs, error  page is shown.
+	 * @param session
+	 * @return
+	 */
 	
 	@RequestMapping("/profile")
 	public ModelAndView profile(HttpSession session) {
